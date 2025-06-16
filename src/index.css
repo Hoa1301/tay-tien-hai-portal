@@ -1,3 +1,4 @@
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
@@ -51,6 +52,11 @@
     --sidebar-border: 220 13% 91%;
 
     --sidebar-ring: 217.2 91.2% 59.8%;
+
+    /* School theme colors */
+    --school-primary: 219 76% 35%;
+    --school-secondary: 219 76% 45%;
+    --school-dark: 219 76% 25%;
   }
 
   .dark {
@@ -89,6 +95,11 @@
     --sidebar-accent-foreground: 240 4.8% 95.9%;
     --sidebar-border: 240 3.7% 15.9%;
     --sidebar-ring: 217.2 91.2% 59.8%;
+
+    /* School theme colors for dark mode */
+    --school-primary: 219 76% 45%;
+    --school-secondary: 219 76% 55%;
+    --school-dark: 219 76% 35%;
   }
 }
 
@@ -99,5 +110,26 @@
 
   body {
     @apply bg-background text-foreground;
+  }
+}
+
+@layer utilities {
+  .bg-school-primary {
+    background-color: hsl(var(--school-primary));
+  }
+  .bg-school-secondary {
+    background-color: hsl(var(--school-secondary));
+  }
+  .bg-school-dark {
+    background-color: hsl(var(--school-dark));
+  }
+  .text-school-primary {
+    color: hsl(var(--school-primary));
+  }
+  .text-school-secondary {
+    color: hsl(var(--school-secondary));
+  }
+  .text-school-dark {
+    color: hsl(var(--school-dark));
   }
 }

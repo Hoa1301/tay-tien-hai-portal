@@ -4,24 +4,26 @@ import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
 import { toast } from '@/hooks/use-toast';
 
 interface LoginProps {
-  onLogin: () => void;
+  onLogin: (role: string) => void;
 }
 
 const Login: React.FC<LoginProps> = ({ onLogin }) => {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
+  const [role, setRole] = useState('');
   const [isLoading, setIsLoading] = useState(false);
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     
-    if (!username || !password) {
+    if (!username || !password || !role) {
       toast({
         title: "Lỗi đăng nhập",
-        description: "Vui lòng nhập tài khoản và mật khẩu",
+        description: "Vui lòng nhập đầy đủ thông tin và chọn vai trò",
         variant: "destructive"
       });
       return;
@@ -31,16 +33,25 @@ const Login: React.FC<LoginProps> = ({ onLogin }) => {
     
     // Simulate login process
     setTimeout(() => {
-      if (username === 'student' && password === '123456') {
+      // Demo credentials for each role
+      const credentials = {
+        student: { username: 'student', password: '123456' },
+        teacher: { username: 'teacher', password: '123456' },
+        parent: { username: 'parent', password: '123456' }
+      };
+
+      const validCredential = credentials[role as keyof typeof credentials];
+      
+      if (validCredential && username === validCredential.username && password === validCredential.password) {
         toast({
           title: "Đăng nhập thành công",
-          description: "Chào mừng bạn đến với hệ thống",
+          description: `Chào mừng ${role === 'student' ? 'học sinh' : role === 'teacher' ? 'giáo viên' : 'phụ huynh'}`,
         });
-        onLogin();
+        onLogin(role);
       } else {
         toast({
           title: "Đăng nhập thất bại",
-          description: "Tài khoản hoặc mật khẩu không chính xác",
+          description: "Tài khoản, mật khẩu hoặc vai trò không chính xác",
           variant: "destructive"
         });
       }
@@ -64,6 +75,19 @@ const Login: React.FC<LoginProps> = ({ onLogin }) => {
         </CardHeader>
         <CardContent>
           <form onSubmit={handleSubmit} className="space-y-4">
+            <div className="space-y-2">
+              <Label htmlFor="role">Vai trò</Label>
+              <Select value={role} onValueChange={setRole}>
+                <SelectTrigger className="h-11">
+                  <SelectValue placeholder="Chọn vai trò" />
+                </SelectTrigger>
+                <SelectContent>
+                  <SelectItem value="student">Học sinh</SelectItem>
+                  <SelectItem value="teacher">Giáo viên</SelectItem>
+                  <SelectItem value="parent">Phụ huynh</SelectItem>
+                </SelectContent>
+              </Select>
+            </div>
             <div className="space-y-2">
               <Label htmlFor="username">Tài khoản</Label>
               <Input
@@ -95,8 +119,10 @@ const Login: React.FC<LoginProps> = ({ onLogin }) => {
             </Button>
           </form>
           <div className="mt-4 text-center text-sm text-muted-foreground">
-            <p>Tài khoản demo: student</p>
-            <p>Mật khẩu demo: 123456</p>
+            <p><strong>Tài khoản demo:</strong></p>
+            <p>Học sinh: student / 123456</p>
+            <p>Giáo viên: teacher / 123456</p>
+            <p>Phụ huynh: parent / 123456</p>
           </div>
         </CardContent>
       </Card>
