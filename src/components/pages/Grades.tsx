@@ -151,7 +151,7 @@ const Grades = () => {
                 <div className="text-2xl font-bold text-red-600">
                   {currentGrades.filter(g => g.average < 5.0).length}
                 </div>
-                <div className="text-sm text-red-700">Môn yếu (<5.0)</div>
+                <div className="text-sm text-red-700">Môn yếu (&lt;5.0)</div>
               </div>
             </div>
           </CardContent>
