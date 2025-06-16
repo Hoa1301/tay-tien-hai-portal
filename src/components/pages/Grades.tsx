@@ -6,7 +6,7 @@ import { BookOpen } from 'lucide-react';
 
 const Grades = () => {
   const [selectedYear, setSelectedYear] = useState('2023-2024');
-  const [selectedSemester, setSemester] = useState('1');
+  const [selectedSemester, setSelectedSemester] = useState('1');
 
   const gradesData = {
     '2023-2024': {
@@ -77,7 +77,7 @@ const Grades = () => {
                 </div>
                 <div className="space-y-1">
                   <label className="text-sm font-medium">Kỳ học</label>
-                  <Select value={selectedSemester} onValueChange={setSemester}>
+                  <Select value={selectedSemester} onValueChange={setSelectedSemester}>
                     <SelectTrigger className="w-32">
                       <SelectValue />
                     </SelectTrigger>
