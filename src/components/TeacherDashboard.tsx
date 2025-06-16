@@ -2,6 +2,7 @@
 import React, { useState } from 'react';
 import { SidebarProvider, SidebarTrigger } from '@/components/ui/sidebar';
 import TeacherSidebar from './TeacherSidebar';
+import NotificationBell from './NotificationBell';
 import TeacherHome from './teacher/TeacherHome';
 import TeacherProfile from './teacher/TeacherProfile';
 import TeacherNotifications from './teacher/TeacherNotifications';
@@ -41,8 +42,12 @@ const TeacherDashboard: React.FC<TeacherDashboardProps> = ({ onLogout }) => {
           onLogout={onLogout}
         />
         <main className="flex-1 overflow-hidden">
-          <div className="md:hidden p-4 bg-white shadow-sm">
+          <div className="md:hidden p-4 bg-white shadow-sm flex justify-between items-center">
             <SidebarTrigger />
+            <NotificationBell userRole="teacher" />
+          </div>
+          <div className="hidden md:block absolute top-4 right-4 z-10">
+            <NotificationBell userRole="teacher" />
           </div>
           {renderContent()}
         </main>

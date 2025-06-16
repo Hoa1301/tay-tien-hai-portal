@@ -2,6 +2,7 @@
 import React, { useState } from 'react';
 import { SidebarProvider, SidebarTrigger } from '@/components/ui/sidebar';
 import ParentSidebar from './ParentSidebar';
+import NotificationBell from './NotificationBell';
 import ParentHome from './parent/ParentHome';
 import ParentContact from './parent/ParentContact';
 import ParentNotifications from './parent/ParentNotifications';
@@ -39,8 +40,12 @@ const ParentDashboard: React.FC<ParentDashboardProps> = ({ onLogout }) => {
           onLogout={onLogout}
         />
         <main className="flex-1 overflow-hidden">
-          <div className="md:hidden p-4 bg-white shadow-sm">
+          <div className="md:hidden p-4 bg-white shadow-sm flex justify-between items-center">
             <SidebarTrigger />
+            <NotificationBell userRole="parent" />
+          </div>
+          <div className="hidden md:block absolute top-4 right-4 z-10">
+            <NotificationBell userRole="parent" />
           </div>
           {renderContent()}
         </main>

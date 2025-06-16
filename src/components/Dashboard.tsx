@@ -2,6 +2,7 @@
 import React, { useState } from 'react';
 import { SidebarProvider, SidebarTrigger } from '@/components/ui/sidebar';
 import AppSidebar from './AppSidebar';
+import NotificationBell from './NotificationBell';
 import Home from './pages/Home';
 import Profile from './pages/Profile';
 import Notifications from './pages/Notifications';
@@ -47,8 +48,12 @@ const Dashboard: React.FC<DashboardProps> = ({ onLogout }) => {
           onLogout={onLogout}
         />
         <main className="flex-1 overflow-hidden">
-          <div className="md:hidden p-4 bg-white shadow-sm">
+          <div className="md:hidden p-4 bg-white shadow-sm flex justify-between items-center">
             <SidebarTrigger />
+            <NotificationBell userRole="student" />
+          </div>
+          <div className="hidden md:block absolute top-4 right-4 z-10">
+            <NotificationBell userRole="student" />
           </div>
           {renderContent()}
         </main>
