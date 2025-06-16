@@ -47,12 +47,12 @@ const UniversitySearch = () => {
   const handleSearch = () => {
     let results = sampleResults;
 
-    if (selectedMajor) {
+    if (selectedMajor && selectedMajor !== 'all') {
       const majorLabel = majors.find(m => m.value === selectedMajor)?.label;
       results = results.filter(r => r.major === majorLabel);
     }
 
-    if (selectedUniversity) {
+    if (selectedUniversity && selectedUniversity !== 'all') {
       const universityLabel = universities.find(u => u.value === selectedUniversity)?.label;
       results = results.filter(r => r.university === universityLabel);
     }
@@ -102,7 +102,7 @@ const UniversitySearch = () => {
                     <SelectValue placeholder="Chọn ngành học" />
                   </SelectTrigger>
                   <SelectContent>
-                    <SelectItem value="">Tất cả ngành</SelectItem>
+                    <SelectItem value="all">Tất cả ngành</SelectItem>
                     {majors.map(major => (
                       <SelectItem key={major.value} value={major.value}>
                         {major.label}
@@ -119,7 +119,7 @@ const UniversitySearch = () => {
                     <SelectValue placeholder="Chọn trường học" />
                   </SelectTrigger>
                   <SelectContent>
-                    <SelectItem value="">Tất cả trường</SelectItem>
+                    <SelectItem value="all">Tất cả trường</SelectItem>
                     {universities.map(university => (
                       <SelectItem key={university.value} value={university.value}>
                         {university.label}
